@@ -322,7 +322,12 @@ class CI_Redis {
 		// fully return from redis and enter into socket.
         $value_length = (int) fgets($this->_connection);
 
-        if ($value_length <= 0) return NULL;
+	if ($value_length <= 0) {
+		if ($value_length == 0) {
+			fgets($this->_connection);
+		}
+		return NULL;
+	}
 
         $response = '';
 
